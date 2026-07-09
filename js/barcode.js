@@ -11,8 +11,8 @@ const BarcodeEngine = {
 
     config: {
 
-        roiTop: 0.05,
-        roiHeight: 0.18,
+        roiTop: 0.02,
+        roiHeight: 0.30,
 
         projectionThreshold: 0.20,
 
