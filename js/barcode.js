@@ -14,7 +14,7 @@ const BarcodeEngine = {
         roiTop: 0.05,
         roiHeight: 0.18,
 
-        projectionThreshold: 0.35,
+        projectionThreshold: 0.20,
 
         scanLines: 50,
 
