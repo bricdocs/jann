@@ -142,7 +142,7 @@ async function initialize(){
 =========================================
  app.js
  Version 2.0
- Bölüm 2
+ Bölüm 2 (Güncel)
 =========================================
 */
 
@@ -150,33 +150,41 @@ async function initialize(){
 // Ana Döngü
 //------------------------------------
 
-function loop(){
+function loop() {
 
-    if(isCameraReady()){
+    if (isCameraReady()) {
 
         const image = captureFrame(canvas);
 
-        if(image){
+        if (image) {
 
-            ctx.putImageData(image,0,0);
+            // Orijinal görüntüyü canvas'a çiz
+            ctx.putImageData(image, 0, 0);
 
+            // Görüntüyü işle
             const processed = processImage(image);
 
-            const result = analyzeBarcode(ctx,processed);
+            // Barkodu analiz et
+            const result = analyzeBarcode(ctx, processed);
 
-            if(result){
+            if (result) {
 
-                updateConfidence(result.confidence);
+                // Paneli güncelle
+                updateLiveResult(result);
 
-                if(collectingFrames){
+                // Kalibrasyon açıksa kareyi kaydet
+                if (collectingFrames) {
 
                     collectCalibrationFrame(result);
 
                 }
 
-            }else{
+            } else {
 
                 updateConfidence(0);
+
+                document.getElementById("bars").textContent = "0";
+                document.getElementById("pattern").textContent = "------";
 
             }
 
@@ -194,11 +202,13 @@ function loop(){
 // Kalibrasyon Başlat
 //------------------------------------
 
-function startCalibrationCapture(){
+function startCalibrationCapture() {
 
-    calibrationFrames=[];
+    calibrationFrames = [];
 
-    collectingFrames=true;
+    calibrationAverage = null;
+
+    collectingFrames = true;
 
     updateStatus("30 Kare Toplanıyor...");
 
@@ -208,36 +218,33 @@ function startCalibrationCapture(){
 // Kare Topla
 //------------------------------------
 
-function collectCalibrationFrame(result){
+function collectCalibrationFrame(result) {
 
-    if(!result)
+    if (!result)
         return;
 
     calibrationFrames.push({
 
-        bars:[...result.bars],
+        bars: [...result.bars],
 
-        normalized:[...result.normalized],
+        normalized: [...result.normalized],
 
-        confidence:result.confidence
+        confidence: result.confidence
 
     });
 
     updateStatus(
 
         calibrationFrames.length +
-
         " / " +
-
         targetFrameCount +
-
         " Kare"
 
     );
 
-    if(calibrationFrames.length>=targetFrameCount){
+    if (calibrationFrames.length >= targetFrameCount) {
 
-        collectingFrames=false;
+        collectingFrames = false;
 
         updateStatus("30 Kare Tamamlandı");
 
@@ -251,18 +258,17 @@ function collectCalibrationFrame(result){
 // Ortalama Hesapla
 //------------------------------------
 
-let calibrationAverage=null;
+let calibrationAverage = null;
 
-function buildCalibrationAverage(){
+function buildCalibrationAverage() {
 
-    if(calibrationFrames.length===0)
+    if (calibrationFrames.length === 0)
         return;
 
-    const bars=[];
+    const bars = [];
+    const normalized = [];
 
-    const normalized=[];
-
-    for(const frame of calibrationFrames){
+    for (const frame of calibrationFrames) {
 
         bars.push(frame.bars);
 
@@ -270,37 +276,35 @@ function buildCalibrationAverage(){
 
     }
 
-    calibrationAverage={
+    let confidence = 0;
 
-        bars:averageArray(bars),
+    for (const frame of calibrationFrames) {
 
-        normalized:averageArray(normalized),
+        confidence += frame.confidence;
 
-        confidence:Math.round(
+    }
 
-            calibrationFrames.reduce(
+    confidence = Math.round(
 
-                (a,b)=>a+b.confidence,
+        confidence / calibrationFrames.length
 
-                0
+    );
 
-            )
+    calibrationAverage = {
 
-            /
+        bars: averageArray(bars),
 
-            calibrationFrames.length
+        normalized: averageArray(normalized),
 
-        )
+        confidence: confidence,
+
+        frames: calibrationFrames.length
 
     };
 
-    console.log(
+    console.log("Calibration Average");
 
-        "Calibration Average",
-
-        calibrationAverage
-
-    );
+    console.log(calibrationAverage);
 
 }
 
