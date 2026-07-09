@@ -295,3 +295,139 @@ header h1{
     text-align:left;
 
 }
+
+/* =====================================
+   Calibration Panel
+===================================== */
+
+#panel h2{
+
+    margin-top:20px;
+
+    margin-bottom:15px;
+
+    color:#00ff88;
+
+    font-size:22px;
+
+    border-bottom:2px solid #444;
+
+    padding-bottom:8px;
+
+}
+
+#panel hr{
+
+    margin:25px 0;
+
+    border:none;
+
+    border-top:2px solid #444;
+
+}
+
+select{
+
+    width:220px;
+
+    padding:8px 10px;
+
+    border-radius:6px;
+
+    border:1px solid #555;
+
+    background:#222;
+
+    color:#fff;
+
+    font-size:16px;
+
+}
+
+.buttons{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    margin-top:20px;
+
+}
+
+.buttons button{
+
+    flex:1;
+
+    min-width:180px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    background:#00aa66;
+
+    color:#fff;
+
+    transition:0.2s;
+
+}
+
+.buttons button:hover{
+
+    background:#00cc77;
+
+}
+
+.buttons button:active{
+
+    transform:scale(0.98);
+
+}
+
+#confidence{
+
+    color:#00ffff;
+
+    font-weight:bold;
+
+}
+
+#recordCount{
+
+    color:#ffff66;
+
+    font-weight:bold;
+
+}
+
+@media(max-width:700px){
+
+    .buttons{
+
+        flex-direction:column;
+
+    }
+
+    .buttons button{
+
+        width:100%;
+
+    }
+
+    select{
+
+        width:100%;
+
+    }
+
+}
