@@ -124,17 +124,13 @@ async function initialize(){
 
     }
 
-    video.addEventListener("loadedmetadata",()=>{
+canvas.width = video.videoWidth;
 
-        canvas.width = video.videoWidth;
+canvas.height = video.videoHeight;
 
-        canvas.height = video.videoHeight;
+updateStatus("Hazır");
 
-        updateStatus("Hazır");
-
-        requestAnimationFrame(loop);
-
-    });
+requestAnimationFrame(loop);
 
 }
 
