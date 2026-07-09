@@ -170,7 +170,7 @@ function loop() {
 
             // Barkodu analiz et
             const result = analyzeBarcode(ctx, processed);
-
+console.log("analyzeBarcode sonucu =", result);
             if (result) {
 
                 // Paneli güncelle
