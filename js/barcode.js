@@ -259,11 +259,17 @@ function scanHorizontal(imageData,y,region,roi){
 
         const i=(y*width+x)*4;
 
-        result.push(
+const isBlack =
 
-            data[i]==0?1:0
+    data[i] < 80 &&
+    data[i + 1] < 80 &&
+    data[i + 2] < 80;
 
-        );
+result.push(
+
+    isBlack ? 1 : 0
+
+);
 
     }
 
