@@ -164,15 +164,15 @@ function locateProjectionRegion(projection){
     if(right==-1)
         right=projection.length-1;
 
-    return{
+return {
 
-        left,
+    left: Math.max(0, left - 10),
 
-        right,
+    right: Math.min(projection.length - 1, right + 10),
 
-        width:right-left
+    width: Math.min(projection.length - 1, right + 10) - Math.max(0, left - 10)
 
-    };
+};
 
 }
 
