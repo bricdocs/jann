@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>Jannersten Barcode Scanner</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Jannersten Barcode Scanner</h1>
+
+</header>
+
+<div id="container">
+
+<video
+id="video"
+playsinline
+autoplay
+muted>
+</video>
+
+<canvas id="canvas"></canvas>
+
+<div id="scanBox"></div>
+
+</div>
+
+<div id="panel">
+
+<div class="item">
+
+<label>Status</label>
+
+<span id="status">
+Loading...
+</span>
+
+</div>
+
+<div class="item">
+
+<label>FPS</label>
+
+<span id="fps">
+0
+</span>
+
+</div>
+
+<div class="item">
+
+<label>Bars</label>
+
+<span id="bars">
+0
+</span>
+
+</div>
+
+<div class="item">
+
+<label>Pattern</label>
+
+<span id="pattern">
+------
+</span>
+
+</div>
+
+<div class="item">
+
+<label>Card</label>
+
+<span id="card">
+Unknown
+</span>
+
+</div>
+
+</div>
+
+<script src="js/database.js"></script>
+<script src="js/image.js"></script>
+<script src="js/barcode.js"></script>
+<script src="js/decoder.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
