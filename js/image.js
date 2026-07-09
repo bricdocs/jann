@@ -1,9 +1,8 @@
 /*
-=========================================
- Jannersten Barcode Scanner
- image.js
- Version : 1.0
-=========================================
+======================================
+image.js
+Version 2.0
+======================================
 */
 
 //--------------------------------------
@@ -46,14 +45,13 @@ function averageBrightness(imageData) {
     }
 
     return total / (d.length / 4);
-
 }
 
 //--------------------------------------
-// Kontrast arttır
+// Kontrast
 //--------------------------------------
 
-function increaseContrast(imageData, factor = 1.4) {
+function increaseContrast(imageData, factor = 2.0) {
 
     const d = imageData.data;
 
@@ -72,18 +70,17 @@ function increaseContrast(imageData, factor = 1.4) {
     }
 
     return imageData;
-
 }
 
 //--------------------------------------
-// Otomatik Threshold
+// Threshold
 //--------------------------------------
 
 function autoThreshold(imageData) {
 
     const d = imageData.data;
 
-    const t = averageBrightness(imageData);
+    const t = 140;
 
     for (let i = 0; i < d.length; i += 4) {
 
@@ -96,54 +93,6 @@ function autoThreshold(imageData) {
     }
 
     return imageData;
-
-}
-
-//--------------------------------------
-// Basit Blur
-//--------------------------------------
-
-function blur(imageData) {
-
-    const w = imageData.width;
-    const h = imageData.height;
-
-    const src = new Uint8ClampedArray(imageData.data);
-    const dst = imageData.data;
-
-    for (let y = 1; y < h - 1; y++) {
-
-        for (let x = 1; x < w - 1; x++) {
-
-            let sum = 0;
-
-            for (let ky = -1; ky <= 1; ky++) {
-
-                for (let kx = -1; kx <= 1; kx++) {
-
-                    const p =
-                        ((y + ky) * w + (x + kx)) * 4;
-
-                    sum += src[p];
-
-                }
-
-            }
-
-            const avg = sum / 9;
-
-            const i = (y * w + x) * 4;
-
-            dst[i] = avg;
-            dst[i + 1] = avg;
-            dst[i + 2] = avg;
-
-        }
-
-    }
-
-    return imageData;
-
 }
 
 //--------------------------------------
@@ -155,24 +104,21 @@ function getTopROI(imageData) {
     const w = imageData.width;
     const h = imageData.height;
 
-    const roiHeight = Math.floor(h * 0.20);
-
     return {
 
         x: 0,
-
         y: 0,
 
         width: w,
 
-        height: roiHeight
+        height: Math.floor(h * 0.20)
 
     };
 
 }
 
 //--------------------------------------
-// Siyah piksel say
+// Siyah Piksel
 //--------------------------------------
 
 function blackPixelCount(imageData, roi) {
@@ -222,7 +168,7 @@ function createHistogram(imageData) {
 }
 
 //--------------------------------------
-// ROI çiz
+// ROI Çiz
 //--------------------------------------
 
 function drawROI(ctx, roi) {
@@ -246,7 +192,7 @@ function drawROI(ctx, roi) {
 }
 
 //--------------------------------------
-// Histogram yazdır
+// Histogram Yazdır
 //--------------------------------------
 
 function printHistogram(hist) {
@@ -266,19 +212,19 @@ function printHistogram(hist) {
 }
 
 //--------------------------------------
-// Ana görüntü işleme
+// Ana Görüntü İşleme
 //--------------------------------------
 
 function processImage(imageData) {
 
     imageData = toGray(imageData);
 
-    imageData = increaseContrast(imageData);
-
-    imageData = blur(imageData);
+    imageData = increaseContrast(imageData, 2.0);
 
     imageData = autoThreshold(imageData);
 
     return imageData;
 
 }
+
+console.log("image.js Version 2.0 hazır.");
