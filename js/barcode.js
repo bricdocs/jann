@@ -892,10 +892,10 @@ function analyzeBarcode(ctx, imageData) {
 
     // 3 - Projection
     const projection = buildProjection(imageData, roi);
-
+console.log("Projection OK =", projection.length);
     // 4 - Barkod bölgesi
     const region = locateProjectionRegion(projection);
-
+console.log("Region =", region);
     if (region == null)
         return null;
 
@@ -909,13 +909,13 @@ function analyzeBarcode(ctx, imageData) {
         region
 
     );
-
+console.log("Scans =", scans.length);
     if (scans.length === 0)
         return null;
 
     // 6 - Run Length
     const results = analyzeScanLines(scans);
-
+console.log("Results =", results);
     // 7 - Sonuç
     const barcode = buildBarcodeResult(
 
