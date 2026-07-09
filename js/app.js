@@ -150,6 +150,10 @@ async function initialize(){
 // Ana Döngü
 //------------------------------------
 
+//------------------------------------
+// Ana Döngü
+//------------------------------------
+
 function loop() {
 
     if (isCameraReady()) {
@@ -172,6 +176,25 @@ function loop() {
                 // Paneli güncelle
                 updateLiveResult(result);
 
+                // ===== YENİ KISIM =====
+                const decoded = decodeBarcode();
+
+                if (decoded) {
+
+                    document.getElementById("card").textContent =
+                        decoded.card.name;
+
+                    document.getElementById("confidence").textContent =
+                        decoded.confidence + "%";
+
+                } else {
+
+                    document.getElementById("card").textContent =
+                        "Unknown";
+
+                }
+                // ======================
+
                 // Kalibrasyon açıksa kareyi kaydet
                 if (collectingFrames) {
 
@@ -185,6 +208,7 @@ function loop() {
 
                 document.getElementById("bars").textContent = "0";
                 document.getElementById("pattern").textContent = "------";
+                document.getElementById("card").textContent = "Unknown";
 
             }
 
