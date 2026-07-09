@@ -70,11 +70,15 @@ function buildProjection(imageData,roi){
 
             const i=(y*width+x)*4;
 
-            if(data[i]==0){
+if (
+    data[i] < 80 &&
+    data[i + 1] < 80 &&
+    data[i + 2] < 80
+){
 
-                black++;
+    black++;
 
-            }
+}
 
         }
 
