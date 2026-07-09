@@ -5,8 +5,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Jannersten Barcode Scanner</title>
 
@@ -24,70 +23,142 @@ content="width=device-width,initial-scale=1.0">
 
 <div id="container">
 
-<video
-id="video"
-playsinline
-autoplay
-muted>
-</video>
+    <video
+        id="video"
+        playsinline
+        autoplay
+        muted>
+    </video>
 
-<canvas id="canvas"></canvas>
+    <canvas id="canvas"></canvas>
 
-<div id="scanBox"></div>
+    <div id="scanBox"></div>
 
 </div>
 
 <div id="panel">
 
-<div class="item">
+    <h2>Canlı Okuma</h2>
 
-<label>Status</label>
+    <div class="item">
+        <label>Status</label>
+        <span id="status">Loading...</span>
+    </div>
 
-<span id="status">
-Loading...
-</span>
+    <div class="item">
+        <label>FPS</label>
+        <span id="fps">0</span>
+    </div>
 
-</div>
+    <div class="item">
+        <label>Bars</label>
+        <span id="bars">0</span>
+    </div>
 
-<div class="item">
+    <div class="item">
+        <label>Pattern</label>
+        <span id="pattern">------</span>
+    </div>
 
-<label>FPS</label>
+    <div class="item">
+        <label>Card</label>
+        <span id="card">Unknown</span>
+    </div>
 
-<span id="fps">
-0
-</span>
+    <hr>
 
-</div>
+    <h2>Kalibrasyon</h2>
 
-<div class="item">
+    <div class="item">
+        <label>Kart</label>
 
-<label>Bars</label>
+        <select id="cardSelect">
 
-<span id="bars">
-0
-</span>
+            <option value="A♣">A♣</option>
+            <option value="2♣">2♣</option>
+            <option value="3♣">3♣</option>
+            <option value="4♣">4♣</option>
+            <option value="5♣">5♣</option>
+            <option value="6♣">6♣</option>
+            <option value="7♣">7♣</option>
+            <option value="8♣">8♣</option>
+            <option value="9♣">9♣</option>
+            <option value="10♣">10♣</option>
+            <option value="J♣">J♣</option>
+            <option value="Q♣">Q♣</option>
+            <option value="K♣">K♣</option>
 
-</div>
+            <option value="A♦">A♦</option>
+            <option value="2♦">2♦</option>
+            <option value="3♦">3♦</option>
+            <option value="4♦">4♦</option>
+            <option value="5♦">5♦</option>
+            <option value="6♦">6♦</option>
+            <option value="7♦">7♦</option>
+            <option value="8♦">8♦</option>
+            <option value="9♦">9♦</option>
+            <option value="10♦">10♦</option>
+            <option value="J♦">J♦</option>
+            <option value="Q♦">Q♦</option>
+            <option value="K♦">K♦</option>
 
-<div class="item">
+            <option value="A♥">A♥</option>
+            <option value="2♥">2♥</option>
+            <option value="3♥">3♥</option>
+            <option value="4♥">4♥</option>
+            <option value="5♥">5♥</option>
+            <option value="6♥">6♥</option>
+            <option value="7♥">7♥</option>
+            <option value="8♥">8♥</option>
+            <option value="9♥">9♥</option>
+            <option value="10♥">10♥</option>
+            <option value="J♥">J♥</option>
+            <option value="Q♥">Q♥</option>
+            <option value="K♥">K♥</option>
 
-<label>Pattern</label>
+            <option value="A♠">A♠</option>
+            <option value="2♠">2♠</option>
+            <option value="3♠">3♠</option>
+            <option value="4♠">4♠</option>
+            <option value="5♠">5♠</option>
+            <option value="6♠">6♠</option>
+            <option value="7♠">7♠</option>
+            <option value="8♠">8♠</option>
+            <option value="9♠">9♠</option>
+            <option value="10♠">10♠</option>
+            <option value="J♠">J♠</option>
+            <option value="Q♠">Q♠</option>
+            <option value="K♠">K♠</option>
 
-<span id="pattern">
-------
-</span>
+        </select>
 
-</div>
+    </div>
 
-<div class="item">
+    <div class="item">
+        <label>Confidence</label>
+        <span id="confidence">0%</span>
+    </div>
 
-<label>Card</label>
+    <div class="item">
+        <label>Kayıt</label>
+        <span id="recordCount">0</span>
+    </div>
 
-<span id="card">
-Unknown
-</span>
+    <div class="buttons">
 
-</div>
+        <button id="captureButton">
+            30 Kare Topla
+        </button>
+
+        <button id="saveCalibration">
+            Kartı Kaydet
+        </button>
+
+        <button id="downloadCalibration">
+            calibration.json
+        </button>
+
+    </div>
 
 </div>
 
