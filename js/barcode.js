@@ -18,9 +18,9 @@ const BarcodeEngine = {
 
         scanLines: 50,
 
-        minBarWidth: 2,
+        minBarWidth: 1,
 
-        maxBarWidth: 60
+        maxBarWidth: 200
 
     },
 
