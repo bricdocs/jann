@@ -269,11 +269,7 @@ if (!window.pixelDebug) {
 
 }
 
-const isBlack =
-
-    data[i] < 80 &&
-    data[i + 1] < 80 &&
-    data[i + 2] < 80;
+const isBlack = data[i] === 0;
 
 result.push(
 
