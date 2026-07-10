@@ -125,56 +125,89 @@ function projectionLimit(p){
 // Barcode Region
 //------------------------------------------
 
+//------------------------------------------
+// Barcode Region
+//------------------------------------------
+
 function locateProjectionRegion(projection){
 
-    const limit=projectionLimit(projection);
+    const limit = projectionLimit(projection);
 
-    let left=-1;
-    let right=-1;
+    const regions = [];
 
-    for(let i=0;i<projection.length;i++){
+    let start = -1;
 
-        if(left==-1){
+    for(let i = 0; i < projection.length; i++){
 
-            if(projection[i]>limit){
+        if(projection[i] >= limit){
 
-                left=i;
-
+            if(start === -1){
+                start = i;
             }
 
-        }
+        }else{
 
-        else{
+            if(start !== -1){
 
-            if(projection[i]<limit){
+                regions.push({
+                    left: start,
+                    right: i - 1,
+                    width: i - start
+                });
 
-                right=i;
-
-                break;
-
+                start = -1;
             }
 
         }
 
     }
 
-    if(left==-1)
+    if(start !== -1){
+
+        regions.push({
+
+            left: start,
+
+            right: projection.length - 1,
+
+            width: projection.length - start
+
+        });
+
+    }
+
+    if(regions.length === 0)
         return null;
 
-    if(right==-1)
-        right=projection.length-1;
+    let best = regions[0];
 
-return {
+    for(const r of regions){
 
-    left: Math.max(0, left - 10),
+        if(r.width > best.width){
 
-    right: Math.min(projection.length - 1, right + 10),
+            best = r;
 
-    width: Math.min(projection.length - 1, right + 10) - Math.max(0, left - 10)
+        }
 
-};
+    }
+
+    return{
+
+        left: Math.max(0, best.left - 10),
+
+        right: Math.min(projection.length - 1, best.right + 10),
+
+        width:
+            Math.min(projection.length - 1, best.right + 10) -
+            Math.max(0, best.left - 10)
+
+    };
 
 }
+
+console.table(regions);
+
+console.log("Seçilen =", best);
 
 //------------------------------------------
 // Draw ROI
