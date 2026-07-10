@@ -935,7 +935,19 @@ console.log("Results =", results);
     drawOverlay(ctx, barcode);
 
     printBarcode(barcode);
+if (!window.debugOnce) {
 
+    window.debugOnce = true;
+
+    console.log("Projection =", projection);
+
+    console.log("Region =", region);
+
+    console.log("Scans =", scans);
+
+    console.log("Results =", results);
+
+}
     return barcode;
 
 }
