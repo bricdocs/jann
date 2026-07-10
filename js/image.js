@@ -80,7 +80,9 @@ function autoThreshold(imageData) {
 
     const d = imageData.data;
 
-    const t = 140;
+    const t = averageBrightness(imageData);
+
+    console.log("Threshold =", t);
 
     for (let i = 0; i < d.length; i += 4) {
 
@@ -93,6 +95,7 @@ function autoThreshold(imageData) {
     }
 
     return imageData;
+
 }
 
 //--------------------------------------
@@ -222,6 +225,14 @@ function processImage(imageData) {
     imageData = increaseContrast(imageData, 2.0);
 
     imageData = autoThreshold(imageData);
+
+    // DEBUG
+    const roi = getTopROI(imageData);
+
+    console.log(
+        "Black Pixels =",
+        blackPixelCount(imageData, roi)
+    );
 
     return imageData;
 
