@@ -715,32 +715,24 @@ function buildBarcodeResult(roi, region, results){
 
 function printBarcode(result){
 
-    if(result==null){
-
-        console.log("Barcode bulunamadı.");
-
+    if(result == null){
         return;
-
     }
 
-    console.clear();
+    if(window.barcodePrinted){
+        return;
+    }
+
+    window.barcodePrinted = true;
 
     console.log("==============");
-
     console.log("JANNERSTEN");
-
     console.log("==============");
-
     console.log("Confidence :", result.confidence,"%");
-
     console.log("Bars       :", result.barCount);
-
     console.log("Widths     :", result.bars);
-
     console.log("Normalized :", result.normalized);
-
     console.log("Scans      :", result.scans);
-
     console.log("==============");
 
 }
@@ -947,16 +939,13 @@ console.log("Results =", results);
     drawOverlay(ctx, barcode);
 
     printBarcode(barcode);
-if (!window.debugOnce) {
+if (!window.debugPrinted) {
 
-    window.debugOnce = true;
+    window.debugPrinted = true;
 
     console.log("Projection =", projection);
-
     console.log("Region =", region);
-
     console.log("Scans =", scans);
-
     console.log("Results =", results);
 
 }
