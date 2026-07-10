@@ -273,7 +273,17 @@ result.push(
 
     }
 
-    return result;
+if (!window.scanDebug) {
+
+    window.scanDebug = true;
+
+    console.log("Scan Length =", result.length);
+
+    console.log("İlk 200 piksel =", result.slice(0, 200));
+
+}
+
+return result;
 
 }
 
