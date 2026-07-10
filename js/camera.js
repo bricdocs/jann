@@ -121,6 +121,16 @@ console.log("video.play OK");
 
 }
 
+const _oldStartCamera = startCamera;
+
+startCamera = async function (...args) {
+
+    console.trace("startCamera TRACE");
+
+    return await _oldStartCamera(...args);
+
+};
+
 // --------------------------------------
 // Ön / Arka kamera değiştir
 // --------------------------------------
@@ -242,6 +252,7 @@ window.addEventListener(
 // Sayfa görünürlüğü
 // --------------------------------------
 
+/*
 document.addEventListener(
 
     "visibilitychange",
@@ -262,3 +273,4 @@ document.addEventListener(
     }
 
 );
+*/
