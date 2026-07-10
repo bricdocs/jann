@@ -909,12 +909,14 @@ console.log("Region =", region);
         region
 
     );
+console.log("İlk Scan =", scans[0]);
 console.log("Scans =", scans.length);
     if (scans.length === 0)
         return null;
 
     // 6 - Run Length
     const results = analyzeScanLines(scans);
+console.log("İlk Result =", results[0]);
 console.log("Results =", results);
     // 7 - Sonuç
     const barcode = buildBarcodeResult(
