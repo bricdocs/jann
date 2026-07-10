@@ -155,7 +155,7 @@ function loop() {
     if (isCameraReady()) {
 
         const image = captureFrame(canvas);
-
+console.log("Frame alındı =", image);
         if (image) {
 
             // Orijinal görüntüyü canvas'a çiz
@@ -163,7 +163,7 @@ function loop() {
 
             // Görüntüyü işle
             const processed = processImage(image);
-
+console.log("processImage OK");
             // Barkodu analiz et
             const result = analyzeBarcode(ctx, processed);
 console.log("analyzeBarcode sonucu =", result);
