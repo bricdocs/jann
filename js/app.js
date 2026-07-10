@@ -111,12 +111,27 @@ function averageArray(arrays){
 //------------------------------------
 
 async function initialize(){
-console.log("initialize başladı");
+
+    console.log("initialize başladı");
+
     updateStatus("Kamera Açılıyor...");
 
-    const ok = await startCamera();
-console.log("startCamera döndü =", ok);
-    if(!ok){
+    await startCamera();
+
+    // Kamera gerçekten hazır olana kadar bekle
+    let retry = 0;
+
+    while (!isCameraReady() && retry < 50) {
+
+        await new Promise(r => setTimeout(r, 100));
+
+        retry++;
+
+    }
+
+    console.log("cameraReady =", isCameraReady());
+
+    if (!isCameraReady()) {
 
         updateStatus("Kamera Başlatılamadı");
 
@@ -124,13 +139,15 @@ console.log("startCamera döndü =", ok);
 
     }
 
-canvas.width = video.videoWidth;
+    canvas.width = video.videoWidth;
 
-canvas.height = video.videoHeight;
+    canvas.height = video.videoHeight;
 
-updateStatus("Hazır");
-console.log("loop başlatılıyor");
-requestAnimationFrame(loop);
+    updateStatus("Hazır");
+
+    console.log("LOOP BAŞLADI");
+
+    requestAnimationFrame(loop);
 
 }
 
