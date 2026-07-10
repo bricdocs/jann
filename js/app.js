@@ -111,11 +111,11 @@ function averageArray(arrays){
 //------------------------------------
 
 async function initialize(){
-
+console.log("initialize başladı");
     updateStatus("Kamera Açılıyor...");
 
     const ok = await startCamera();
-
+console.log("startCamera döndü =", ok);
     if(!ok){
 
         updateStatus("Kamera Başlatılamadı");
@@ -129,7 +129,7 @@ canvas.width = video.videoWidth;
 canvas.height = video.videoHeight;
 
 updateStatus("Hazır");
-
+console.log("loop başlatılıyor");
 requestAnimationFrame(loop);
 
 }
@@ -509,16 +509,12 @@ function updateLiveResult(result){
 // Başlat
 //------------------------------------
 
-window.addEventListener(
+window.addEventListener("load", () => {
 
-    "load",
+    console.log("APP START");
 
-    ()=>{
+    connectButtons();
 
-        connectButtons();
+    initialize();
 
-        initialize();
-
-    }
-
-);
+});
