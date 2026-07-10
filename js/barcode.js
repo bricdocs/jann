@@ -258,6 +258,16 @@ function scanHorizontal(imageData,y,region,roi){
     ){
 
         const i=(y*width+x)*4;
+if (!window.pixelDebug) {
+
+    window.pixelDebug = true;
+
+    console.log(
+        "İlk 30 gri değer:",
+        Array.from({length:30}, (_,k)=>data[(y*width + roi.x + region.left + k)*4])
+    );
+
+}
 
 const isBlack =
 
