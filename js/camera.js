@@ -58,7 +58,7 @@ function stopCamera() {
 // --------------------------------------
 
 async function startCamera(facing = "environment") {
-
+console.count("startCamera çağrıldı");
     if (!isCameraSupported()) {
 
         setStatus("Tarayıcı kamerayı desteklemiyor.");
@@ -68,11 +68,11 @@ async function startCamera(facing = "environment") {
     }
 
     stopCamera();
-
+console.log("stopCamera sonrası");
     currentFacingMode = facing;
 
     try {
-
+console.log("getUserMedia başlıyor");
         cameraStream =
             await navigator.mediaDevices.getUserMedia({
 
@@ -99,7 +99,7 @@ async function startCamera(facing = "environment") {
         video.srcObject = cameraStream;
 
         await video.play();
-
+console.log("video.play OK");
         cameraReady = true;
 
         setStatus("Kamera Hazır");
